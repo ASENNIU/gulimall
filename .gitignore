@@ -20,3 +20,8 @@ buildNumber.properties
 
 **/.gitignore
 
+**/.gradle
+**/gradle/**
+**/gradle**
+
+
