@@ -1,4 +1,4 @@
-package com.leon.gulimall.lware;
+package com.leon.gulimall.ware;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
