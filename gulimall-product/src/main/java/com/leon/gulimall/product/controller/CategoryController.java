@@ -33,7 +33,7 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 查出所有分类以及子分类，以树形结构组装起来
+     * 查出所有分类以及子分类，以树形结构组装
      */
     @RequestMapping("/list/tree")
     //@RequiresPermissions("product:category:list")
