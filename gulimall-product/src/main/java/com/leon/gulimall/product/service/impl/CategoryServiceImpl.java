@@ -52,6 +52,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     }
 
     private List<CategoryEntity> getChildrens(CategoryEntity root, List<CategoryEntity> all) {
+        // 递归查询，自底向上
         return all.stream().filter(categoryEntity ->
                         Objects.equals(categoryEntity.getParentCid(), root.getCatId()))
                 .sorted((entity1, entity2) -> {
