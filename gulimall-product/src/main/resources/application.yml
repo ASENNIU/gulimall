@@ -7,9 +7,19 @@ spring:
     password: root
     url: jdbc:mysql://192.168.18.166:3306/gulimall_pms?characterEncoding=utf-8
     driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
     db-config:
       id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+logging:
+  level:
+    com.leon.gulimall: debug
+
