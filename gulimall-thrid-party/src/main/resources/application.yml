@@ -11,7 +11,7 @@ spring:
         bucket: leon-gulimall-images
 
   application:
-    name: gulimall-third-party
+    name: gulimall-thrid-party
 
 server:
   port: 30000
