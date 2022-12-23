@@ -2,11 +2,6 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: test_route
-          uri: https://wwww.baidu.com
-          predicates:
-            - Query=url,baidu
-
         - id: product_route
           uri: lb://gulimall-product
           predicates:
@@ -20,6 +15,13 @@ spring:
             - Path=/api/thridparty/**
           filters:
             - RewritePath=/api/thridparty/(?<segment>.*), /$\{segment}
+
+        - id: member_route
+          uri: lb://gulimall-member
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
 
 
         - id: admin_route
