@@ -9,12 +9,12 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*), /$\{segment}
 
-        - id: thrid_party_route
-          uri: lb://gulimall-thrid-party
+        - id: third_party_route
+          uri: lb://gulimall-third-party
           predicates:
-            - Path=/api/thridparty/**
+            - Path=/api/thirdparty/**
           filters:
-            - RewritePath=/api/thridparty/(?<segment>.*), /$\{segment}
+            - RewritePath=/api/thirdparty/(?<segment>.*), /$\{segment}
 
         - id: member_route
           uri: lb://gulimall-member
