@@ -20,6 +20,7 @@
         <module>gulimall-gateway</module>
         <module>renren-fast</module>
         <module>gulimall-thrid-party</module>
+        <module>gulimall-search</module>
     </modules>
 
 </project>
