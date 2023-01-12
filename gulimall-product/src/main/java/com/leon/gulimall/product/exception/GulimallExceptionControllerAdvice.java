@@ -1,6 +1,6 @@
 package com.leon.gulimall.product.exception;
 
-import com.leon.common.exception.BizCodeEnume;
+import com.leon.common.exception.BizCodeEnum;
 import com.leon.common.utils.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -24,6 +24,6 @@ public class GulimallExceptionControllerAdvice {
         bindingResult.getFieldErrors().forEach((item) -> {
             errorMap.put(item.getField(), item.getDefaultMessage());
         });
-        return R.error(BizCodeEnume.VALID_EXCEPTION.getCode(), BizCodeEnume.VALID_EXCEPTION.getMsg()).put("data", errorMap);
+        return R.error(BizCodeEnum.VAILD_EXCEPTION.getCode(), BizCodeEnum.VAILD_EXCEPTION.getMessage()).put("data", errorMap);
     }
 }
