@@ -30,7 +30,7 @@ public class R extends HashMap<String, Object> {
 
 	//利用fastjson进行反序列化
 	public <T> T getData(TypeReference<T> typeReference) {
-		Object data = get("data");	//默认是map
+		Object data = get("data");	//get()取得的数据默认是map
 		String jsonString = JSON.toJSONString(data);
 		T t = JSON.parseObject(jsonString, typeReference);
 		return t;

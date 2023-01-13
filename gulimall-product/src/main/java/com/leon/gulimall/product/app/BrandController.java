@@ -1,4 +1,4 @@
-package com.leon.gulimall.product.controller;
+package com.leon.gulimall.product.app;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -21,8 +21,6 @@ import com.leon.gulimall.product.entity.BrandEntity;
 import com.leon.gulimall.product.service.BrandService;
 import com.leon.common.utils.PageUtils;
 import com.leon.common.utils.R;
-
-import javax.validation.Valid;
 
 
 /**

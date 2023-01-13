@@ -1,4 +1,4 @@
-package com.leon.gulimall.product.controller;
+package com.leon.gulimall.product.app;
 
 import java.util.Arrays;
 import java.util.Map;
