@@ -3,6 +3,7 @@ package com.leon.gulimall.product.service.impl;
 import com.leon.gulimall.product.service.CategoryBrandRelationService;
 import com.leon.gulimall.product.vo.Catelog2Vo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -87,6 +88,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
     }
 
+    @Cacheable(value = {"category"},key = "#root.method.name",sync = true)
     @Override
     public List<CategoryEntity> getLevel1Categorys() {
         System.out.println("getLevel1Categorys........");
@@ -97,6 +99,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return categoryEntities;
     }
 
+    @Cacheable(value = "category",key = "#root.methodName")
     @Override
     public Map<String, List<Catelog2Vo>> getCatalogJson() {
         System.out.println("查询了数据库");
