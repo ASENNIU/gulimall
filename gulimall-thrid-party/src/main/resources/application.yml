@@ -9,6 +9,13 @@ spring:
       oss:
         endpoint: oss-cn-chengdu.aliyuncs.com
         bucket: leon-gulimall-images
+      sms:
+        host: https://gyytz.market.alicloudapi.com
+        path: /sms/smsSend
+        appcode: 498a8aec6eed43d9aaf858aeea17a30a
+        method: POST
+        smsSignId: 2e65b1bb3d054466b82f0c9d125465e2
+        templateId: 908e94ccf08b4476ba6c876d13f084ad
 
   application:
     name: gulimall-third-party
