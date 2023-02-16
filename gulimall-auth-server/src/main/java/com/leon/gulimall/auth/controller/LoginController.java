@@ -4,8 +4,10 @@ import com.alibaba.fastjson.TypeReference;
 import com.leon.common.constant.AuthServerConstant;
 import com.leon.common.exception.BizCodeEnum;
 import com.leon.common.utils.R;
+import com.leon.common.vo.MemberResponseVo;
 import com.leon.gulimall.auth.feign.MemberFeignService;
 import com.leon.gulimall.auth.feign.ThirdPartFeignService;
+import com.leon.gulimall.auth.vo.UserLoginVo;
 import com.leon.gulimall.auth.vo.UserRegisterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -19,11 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
+import static com.leon.common.constant.AuthServerConstant.LOGIN_USER;
 
 @Controller
 public class LoginController {
@@ -128,5 +134,41 @@ public class LoginController {
         }
     }
 
+    @GetMapping(value = "/login.html")
+    public String loginPage(HttpSession session) {
 
+        //从session先取出来用户的信息，判断用户是否已经登录过了
+        Object attribute = session.getAttribute(LOGIN_USER);
+        //如果用户没登录那就跳转到登录页面
+        if (attribute == null) {
+            return "login";
+        } else {
+            return "redirect:http://gulimall.com";
+        }
+    }
+
+    @PostMapping(value = "/login")
+    public String login(UserLoginVo vo, RedirectAttributes attributes, HttpSession session) {
+
+        //远程登录
+        R login = memberFeignService.login(vo);
+
+        if (login.getCode() == 0) {
+            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
+            session.setAttribute(LOGIN_USER,data);
+            return "redirect:http://gulimall.com";
+        } else {
+            Map<String,String> errors = new HashMap<>();
+            errors.put("msg",login.getData("msg",new TypeReference<String>(){}));
+            attributes.addFlashAttribute("errors",errors);
+            return "redirect:http://auth.gulimall.com/login.html";
+        }
+    }
+
+    @GetMapping(value = "/loguot.html")
+    public String logout(HttpServletRequest request) {
+        request.getSession().removeAttribute(LOGIN_USER);
+        request.getSession().invalidate();
+        return "redirect:http://gulimall.com";
+    }
 }
