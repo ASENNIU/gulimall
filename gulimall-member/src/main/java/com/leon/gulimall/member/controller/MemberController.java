@@ -10,6 +10,7 @@ import com.leon.gulimall.member.exception.PhoneException;
 import com.leon.gulimall.member.exception.UsernameException;
 import com.leon.gulimall.member.vo.MemberUserLoginVo;
 import com.leon.gulimall.member.vo.MemberUserRegisterVo;
+import com.leon.gulimall.member.vo.SocialUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +52,18 @@ public class MemberController {
     public R login(@RequestBody MemberUserLoginVo vo) {
 
         MemberEntity memberEntity = memberService.login(vo);
+
+        if (memberEntity != null) {
+            return R.ok().setData(memberEntity);
+        } else {
+            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getCode(),BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/oauth2/login")
+    public R oauthLogin(@RequestBody SocialUser socialUser) throws Exception {
+
+        MemberEntity memberEntity = memberService.login(socialUser);
 
         if (memberEntity != null) {
             return R.ok().setData(memberEntity);

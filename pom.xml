@@ -21,6 +21,7 @@
         <module>renren-fast</module>
         <module>gulimall-thrid-party</module>
         <module>gulimall-search</module>
+        <module>gulimall-cart</module>
     </modules>
 
 </project>
